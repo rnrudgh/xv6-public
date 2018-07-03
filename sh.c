@@ -61,22 +61,58 @@ runcmd(struct cmd *cmd)
     ecmd = (struct execcmd*)cmd;
     if(ecmd->argv[0] == 0)
       _exit(0);
-    fprintf(stderr, "exec not implemented\n");
     // Your code here ...
+    //int i = 0;
+    //for(i = 0; i < MAXARGS; i++) {
+    //  if(ecmd->argv[i] == 0)
+    //    break;
+    //  printf("%s\n",ecmd->argv[i]);
+    //}
+    execvp(ecmd->argv[0], ecmd->argv);
+    //fprintf(stderr, "exec not implemented\n");
+
+    
     break;
 
   case '>':
   case '<':
     rcmd = (struct redircmd*)cmd;
-    fprintf(stderr, "redir not implemented\n");
     // Your code here ...
+
+    //printf("fd : %d \n", rcmd->fd);
+    close(rcmd->fd);
+    if ( (rcmd->fd = open (rcmd->file, rcmd->flags, S_IRWXU)) < 0 ) {
+      fprintf(stderr, "file is not opened\n");
+      _exit(0);
+    }
     runcmd(rcmd->cmd);
+      
+
+
     break;
 
   case '|':
     pcmd = (struct pipecmd*)cmd;
-    fprintf(stderr, "pipe not implemented\n");
+    //fprintf(stderr, "pipe not implemented\n");
     // Your code here ...
+    
+    pipe(p);
+
+    if(fork1() == 0) {
+      close(1);
+      dup(p[1]);
+      close(p[1]);
+      close(p[0]);
+      runcmd(pcmd->left);
+    } else {
+      close(p[1]);
+      close(0);
+      dup(p[0]);
+      close(p[0]);
+      wait(&r);
+      runcmd(pcmd->right);
+    }
+
     break;
   }    
   _exit(0);
@@ -86,7 +122,7 @@ int
 getcmd(char *buf, int nbuf)
 {
   if (isatty(fileno(stdin)))
-    fprintf(stdout, "6.828$ ");
+    fprintf(stdout, "qoo-6.828$ ");
   memset(buf, 0, nbuf);
   if(fgets(buf, nbuf, stdin) == 0)
     return -1; // EOF
