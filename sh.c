@@ -68,23 +68,31 @@ runcmd(struct cmd *cmd)
     //    break;
     //  printf("%s\n",ecmd->argv[i]);
     //}
-    execvp(ecmd->argv[0], ecmd->argv);
-    //fprintf(stderr, "exec not implemented\n");
 
-    
+    // executing instruction
+    execvp(ecmd->argv[0], ecmd->argv);
+
+    //fprintf(stderr, "exec not implemented\n");
     break;
 
   case '>':
   case '<':
     rcmd = (struct redircmd*)cmd;
     // Your code here ...
-
     //printf("fd : %d \n", rcmd->fd);
+
+    // rcmd->fd initialized 0 or 1. so first close file descriptor value 
+    // for redirection.
     close(rcmd->fd);
+
+    // open system call function map unused file descriptors
+    // Therefore, when you execute close for the first time, rcmd->file
+    // is mapped to 0 or 1.
     if ( (rcmd->fd = open (rcmd->file, rcmd->flags, S_IRWXU)) < 0 ) {
       fprintf(stderr, "file is not opened\n");
       _exit(0);
     }
+
     runcmd(rcmd->cmd);
       
 
@@ -96,10 +104,14 @@ runcmd(struct cmd *cmd)
     //fprintf(stderr, "pipe not implemented\n");
     // Your code here ...
     
+    // pipe system call make two integer array piping input, output.
+    // this code using p[0] is output, p[1] is input.
     pipe(p);
 
+    // child mean left and parent mean right.
     if(fork1() == 0) {
       close(1);
+      // dupulicate p[1] file to 1's file
       dup(p[1]);
       close(p[1]);
       close(p[0]);
@@ -107,9 +119,12 @@ runcmd(struct cmd *cmd)
     } else {
       close(p[1]);
       close(0);
+      // dupulicate p[0] file to 0's file
       dup(p[0]);
       close(p[0]);
+      // This ensures order. 
       wait(&r);
+      
       runcmd(pcmd->right);
     }
 
