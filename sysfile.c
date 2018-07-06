@@ -87,6 +87,7 @@ sys_write(void)
 
   if(argfd(0, 0, &f) < 0 || argint(2, &n) < 0 || argptr(1, &p, n) < 0)
     return -1;
+  //cprintf("f : %x \n byte : %d \n buffer : %s \n", f,n,p);
   return filewrite(f, p, n);
 }
 

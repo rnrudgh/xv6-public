@@ -1,0 +1,907 @@
+
+bootasm.S,106
+start:start12,362
+start32:start3254,1774
+spin:spin75,2589
+gdt:gdt80,2694
+gdtdesc:gdtdesc85,2859
+
+entry.S,101
+multiboot_header:multiboot_header30,846
+_start = V2P_WO(entry)_start41,1141
+entry:entry45,1229
+
+entryother.S,106
+start:start24,847
+start32:start3248,1604
+spin:spin80,2584
+gdt:gdt84,2617
+gdtdesc:gdtdesc90,2708
+
+initcode.S,74
+start:start10,138
+exit:exit18,272
+init:init24,357
+argv:argv29,425
+
+swtch.S,20
+swtch:swtch10,256
+
+trapasm.S,48
+alltraps:alltraps5,70
+trapret:trapret25,378
+
+usys.S,57
+#define SYSCALL(name) \SYSCALL4,41
+  name: \name6,82
+
+vectors.S,7605
+vector0:vector05,82
+vector1:vector110,143
+vector2:vector215,204
+vector3:vector320,265
+vector4:vector425,326
+vector5:vector530,387
+vector6:vector635,448
+vector7:vector740,509
+vector8:vector845,570
+vector9:vector949,620
+vector10:vector1054,682
+vector11:vector1158,735
+vector12:vector1262,788
+vector13:vector1366,841
+vector14:vector1470,894
+vector15:vector1574,947
+vector16:vector1679,1011
+vector17:vector1784,1075
+vector18:vector1888,1128
+vector19:vector1993,1192
+vector20:vector2098,1256
+vector21:vector21103,1320
+vector22:vector22108,1384
+vector23:vector23113,1448
+vector24:vector24118,1512
+vector25:vector25123,1576
+vector26:vector26128,1640
+vector27:vector27133,1704
+vector28:vector28138,1768
+vector29:vector29143,1832
+vector30:vector30148,1896
+vector31:vector31153,1960
+vector32:vector32158,2024
+vector33:vector33163,2088
+vector34:vector34168,2152
+vector35:vector35173,2216
+vector36:vector36178,2280
+vector37:vector37183,2344
+vector38:vector38188,2408
+vector39:vector39193,2472
+vector40:vector40198,2536
+vector41:vector41203,2600
+vector42:vector42208,2664
+vector43:vector43213,2728
+vector44:vector44218,2792
+vector45:vector45223,2856
+vector46:vector46228,2920
+vector47:vector47233,2984
+vector48:vector48238,3048
+vector49:vector49243,3112
+vector50:vector50248,3176
+vector51:vector51253,3240
+vector52:vector52258,3304
+vector53:vector53263,3368
+vector54:vector54268,3432
+vector55:vector55273,3496
+vector56:vector56278,3560
+vector57:vector57283,3624
+vector58:vector58288,3688
+vector59:vector59293,3752
+vector60:vector60298,3816
+vector61:vector61303,3880
+vector62:vector62308,3944
+vector63:vector63313,4008
+vector64:vector64318,4072
+vector65:vector65323,4136
+vector66:vector66328,4200
+vector67:vector67333,4264
+vector68:vector68338,4328
+vector69:vector69343,4392
+vector70:vector70348,4456
+vector71:vector71353,4520
+vector72:vector72358,4584
+vector73:vector73363,4648
+vector74:vector74368,4712
+vector75:vector75373,4776
+vector76:vector76378,4840
+vector77:vector77383,4904
+vector78:vector78388,4968
+vector79:vector79393,5032
+vector80:vector80398,5096
+vector81:vector81403,5160
+vector82:vector82408,5224
+vector83:vector83413,5288
+vector84:vector84418,5352
+vector85:vector85423,5416
+vector86:vector86428,5480
+vector87:vector87433,5544
+vector88:vector88438,5608
+vector89:vector89443,5672
+vector90:vector90448,5736
+vector91:vector91453,5800
+vector92:vector92458,5864
+vector93:vector93463,5928
+vector94:vector94468,5992
+vector95:vector95473,6056
+vector96:vector96478,6120
+vector97:vector97483,6184
+vector98:vector98488,6248
+vector99:vector99493,6312
+vector100:vector100498,6377
+vector101:vector101503,6444
+vector102:vector102508,6511
+vector103:vector103513,6578
+vector104:vector104518,6645
+vector105:vector105523,6712
+vector106:vector106528,6779
+vector107:vector107533,6846
+vector108:vector108538,6913
+vector109:vector109543,6980
+vector110:vector110548,7047
+vector111:vector111553,7114
+vector112:vector112558,7181
+vector113:vector113563,7248
+vector114:vector114568,7315
+vector115:vector115573,7382
+vector116:vector116578,7449
+vector117:vector117583,7516
+vector118:vector118588,7583
+vector119:vector119593,7650
+vector120:vector120598,7717
+vector121:vector121603,7784
+vector122:vector122608,7851
+vector123:vector123613,7918
+vector124:vector124618,7985
+vector125:vector125623,8052
+vector126:vector126628,8119
+vector127:vector127633,8186
+vector128:vector128638,8253
+vector129:vector129643,8320
+vector130:vector130648,8387
+vector131:vector131653,8454
+vector132:vector132658,8521
+vector133:vector133663,8588
+vector134:vector134668,8655
+vector135:vector135673,8722
+vector136:vector136678,8789
+vector137:vector137683,8856
+vector138:vector138688,8923
+vector139:vector139693,8990
+vector140:vector140698,9057
+vector141:vector141703,9124
+vector142:vector142708,9191
+vector143:vector143713,9258
+vector144:vector144718,9325
+vector145:vector145723,9392
+vector146:vector146728,9459
+vector147:vector147733,9526
+vector148:vector148738,9593
+vector149:vector149743,9660
+vector150:vector150748,9727
+vector151:vector151753,9794
+vector152:vector152758,9861
+vector153:vector153763,9928
+vector154:vector154768,9995
+vector155:vector155773,10062
+vector156:vector156778,10129
+vector157:vector157783,10196
+vector158:vector158788,10263
+vector159:vector159793,10330
+vector160:vector160798,10397
+vector161:vector161803,10464
+vector162:vector162808,10531
+vector163:vector163813,10598
+vector164:vector164818,10665
+vector165:vector165823,10732
+vector166:vector166828,10799
+vector167:vector167833,10866
+vector168:vector168838,10933
+vector169:vector169843,11000
+vector170:vector170848,11067
+vector171:vector171853,11134
+vector172:vector172858,11201
+vector173:vector173863,11268
+vector174:vector174868,11335
+vector175:vector175873,11402
+vector176:vector176878,11469
+vector177:vector177883,11536
+vector178:vector178888,11603
+vector179:vector179893,11670
+vector180:vector180898,11737
+vector181:vector181903,11804
+vector182:vector182908,11871
+vector183:vector183913,11938
+vector184:vector184918,12005
+vector185:vector185923,12072
+vector186:vector186928,12139
+vector187:vector187933,12206
+vector188:vector188938,12273
+vector189:vector189943,12340
+vector190:vector190948,12407
+vector191:vector191953,12474
+vector192:vector192958,12541
+vector193:vector193963,12608
+vector194:vector194968,12675
+vector195:vector195973,12742
+vector196:vector196978,12809
+vector197:vector197983,12876
+vector198:vector198988,12943
+vector199:vector199993,13010
+vector200:vector200998,13077
+vector201:vector2011003,13144
+vector202:vector2021008,13211
+vector203:vector2031013,13278
+vector204:vector2041018,13345
+vector205:vector2051023,13412
+vector206:vector2061028,13479
+vector207:vector2071033,13546
+vector208:vector2081038,13613
+vector209:vector2091043,13680
+vector210:vector2101048,13747
+vector211:vector2111053,13814
+vector212:vector2121058,13881
+vector213:vector2131063,13948
+vector214:vector2141068,14015
+vector215:vector2151073,14082
+vector216:vector2161078,14149
+vector217:vector2171083,14216
+vector218:vector2181088,14283
+vector219:vector2191093,14350
+vector220:vector2201098,14417
+vector221:vector2211103,14484
+vector222:vector2221108,14551
+vector223:vector2231113,14618
+vector224:vector2241118,14685
+vector225:vector2251123,14752
+vector226:vector2261128,14819
+vector227:vector2271133,14886
+vector228:vector2281138,14953
+vector229:vector2291143,15020
+vector230:vector2301148,15087
+vector231:vector2311153,15154
+vector232:vector2321158,15221
+vector233:vector2331163,15288
+vector234:vector2341168,15355
+vector235:vector2351173,15422
+vector236:vector2361178,15489
+vector237:vector2371183,15556
+vector238:vector2381188,15623
+vector239:vector2391193,15690
+vector240:vector2401198,15757
+vector241:vector2411203,15824
+vector242:vector2421208,15891
+vector243:vector2431213,15958
+vector244:vector2441218,16025
+vector245:vector2451223,16092
+vector246:vector2461228,16159
+vector247:vector2471233,16226
+vector248:vector2481238,16293
+vector249:vector2491243,16360
+vector250:vector2501248,16427
+vector251:vector2511253,16494
+vector252:vector2521258,16561
+vector253:vector2531263,16628
+vector254:vector2541268,16695
+vector255:vector2551273,16762
+vectors:vectors1281,16849
+
+bio.c,316
+  struct spinlock lock;lock30,969
+  struct buf buf[NBUF];buf31,993
+  struct buf head;head35,1108
+} bcache;bcache36,1127
+binit(void)binit39,1143
+bget(uint dev, uint blockno)bget62,1693
+bread(uint dev, uint blockno)bread97,2579
+bwrite(struct buf *b)bwrite110,2775
+brelse(struct buf *b)brelse121,2958
+
+bootmain.c,207
+#define SECTSIZE SECTSIZE13,355
+bootmain(void)bootmain18,418
+waitdisk(void)waitdisk51,1181
+readsect(void *dst, uint offset)readsect60,1319
+readseg(uchar* pa, uint count, uint offset)readseg79,1764
+
+cat.c,86
+char buf[512];buf5,56
+cat(int fd)cat8,77
+main(int argc, char *argv[])main25,317
+
+console.c,919
+static int panicked = 0;panicked20,386
+  struct spinlock lock;lock23,428
+  int locking;locking24,452
+} cons;cons25,467
+printint(int xx, int base, int sign)printint28,488
+cprintf(char *fmt, ...)cprintf55,902
+panic(char *s)panic107,1773
+#define BACKSPACE BACKSPACE127,2127
+#define CRTPORT CRTPORT128,2151
+static ushort *crt = (ushort*)P2V(0xb8000);  // CGA memorycrt129,2173
+cgaputc(int c)cgaputc132,2245
+consputc(int c)consputc166,2912
+#define INPUT_BUF INPUT_BUF181,3098
+  char buf[INPUT_BUF];buf183,3129
+  uint r;  // Read indexr184,3152
+  uint w;  // Write indexw185,3177
+  uint e;  // Edit indexe186,3203
+} input;input187,3228
+#define C(C189,3238
+consoleintr(int (*getc)(void))consoleintr192,3282
+consoleread(struct inode *ip, char *dst, int n)consoleread236,4321
+consolewrite(struct inode *ip, char *buf, int n)consolewrite274,4990
+consoleinit(void)consoleinit289,5200
+
+echo.c,39
+main(int argc, char *argv[])main6,60
+
+exec.c,42
+exec(char *path, char **argv)exec11,153
+
+file.c,468
+struct devsw devsw[NDEV];devsw13,163
+  struct spinlock lock;lock15,198
+  struct file file[NFILE];file16,222
+} ftable;ftable17,249
+fileinit(void)fileinit20,265
+filealloc(void)filealloc27,364
+filedup(struct file *f)filedup45,662
+fileclose(struct file *f)fileclose57,872
+filestat(struct file *f, struct stat *st)filestat84,1302
+fileread(struct file *f, char *addr, int n)fileread97,1492
+filewrite(struct file *f, char *addr, int n)filewrite118,1861
+
+forktest.c,116
+#define N N8,161
+printf(int fd, char *s, ...)printf11,183
+forktest(void)forktest17,249
+main(void)main52,719
+
+fs.c,1376
+#define min(min24,692
+struct superblock sb; sb28,855
+readsb(int dev, struct superblock *sb)readsb32,909
+bzero(int dev, int bno)bzero43,1075
+balloc(uint dev)balloc57,1265
+bfree(int dev, uint b)bfree82,1787
+  struct spinlock lock;lock168,4815
+  struct inode inode[NINODE];inode169,4839
+} icache;icache170,4869
+iinit(int dev)iinit173,4885
+ialloc(uint dev, short type)ialloc196,5489
+iupdate(struct inode *ip)iupdate222,6163
+iget(uint dev, uint inum)iget243,6702
+idup(struct inode *ip)idup278,7413
+ilock(struct inode *ip)ilock289,7590
+iunlock(struct inode *ip)iunlock317,8173
+iput(struct inode *ip)iput333,8638
+iunlockput(struct inode *ip)iunlockput357,9110
+bmap(struct inode *ip, uint bn)bmap374,9547
+itrunc(struct inode *ip)itrunc409,10375
+stati(struct inode *ip, struct stat *st)stati441,10947
+readi(struct inode *ip, char *dst, uint off, uint n)readi454,11179
+writei(struct inode *ip, char *src, uint off, uint n)writei483,11815
+namecmp(const char *s, const char *t)namecmp518,12503
+dirlookup(struct inode *dp, char *name, uint *poff)dirlookup526,12686
+dirlink(struct inode *dp, char *name, uint inum)dirlink553,13278
+skipelem(char *path, char *name)skipelem597,14398
+namex(char *path, int nameiparent, char *name)namex626,15028
+namei(char *path)namei661,15647
+nameiparent(char *path, char *name)nameiparent668,15736
+
+grep.c,264
+char buf[1024];buf7,107
+grep(char *pattern, int fd)grep11,154
+main(int argc, char *argv[])main39,586
+match(char *re, char *text)match73,1156
+int matchhere(char *re, char *text)matchhere85,1410
+int matchstar(int c, char *re, char *text)matchstar99,1756
+
+ide.c,648
+#define SECTOR_SIZE SECTOR_SIZE16,277
+#define IDE_BSY IDE_BSY17,303
+#define IDE_DRDY IDE_DRDY18,330
+#define IDE_DF IDE_DF19,357
+#define IDE_ERR IDE_ERR20,384
+#define IDE_CMD_READ IDE_CMD_READ22,412
+#define IDE_CMD_WRITE IDE_CMD_WRITE23,439
+#define IDE_CMD_RDMUL IDE_CMD_RDMUL24,466
+#define IDE_CMD_WRMUL IDE_CMD_WRMUL25,493
+static struct spinlock idelock;idelock31,698
+static struct buf *idequeue;idequeue32,730
+static int havedisk1;havedisk134,760
+idewait(int checkerr)idewait39,867
+ideinit(void)ideinit51,1049
+idestart(struct buf *b)idestart74,1439
+ideintr(void)ideintr104,2287
+iderw(struct buf *b)iderw138,2972
+
+init.c,62
+char *argv[] = { "sh", 0 };argv8,116
+main(void)main11,149
+
+ioapic.c,625
+#define IOAPIC IOAPIC9,205
+#define REG_ID REG_ID11,274
+#define REG_VER REG_VER12,321
+#define REG_TABLE REG_TABLE13,373
+#define INT_DISABLED INT_DISABLED20,689
+#define INT_LEVEL INT_LEVEL21,746
+#define INT_ACTIVELOW INT_ACTIVELOW22,811
+#define INT_LOGICAL INT_LOGICAL23,870
+volatile struct ioapic *ioapic;ioapic25,944
+struct ioapic {ioapic28,1040
+  uint reg;reg29,1056
+  uint pad[3];pad30,1068
+  uint data;data31,1083
+ioapicread(int reg)ioapicread35,1112
+ioapicwrite(int reg, uint data)ioapicwrite42,1193
+ioapicinit(void)ioapicinit49,1279
+ioapicenable(int irq, int cpunum)ioapicenable68,1775
+
+kalloc.c,390
+struct run {run16,466
+  struct run *next;next17,479
+  struct spinlock lock;lock21,512
+  int use_lock;use_lock22,536
+  struct run *freelist;freelist23,552
+} kmem;kmem24,576
+kinit1(void *vstart, void *vend)kinit132,881
+kinit2(void *vstart, void *vend)kinit240,1004
+freerange(void *vstart, void *vend)freerange47,1095
+kfree(char *v)kfree60,1463
+kalloc(void)kalloc83,1957
+
+kbd.c,56
+kbdgetc(void)kbdgetc7,76
+kbdintr(void)kbdintr47,883
+
+kill.c,38
+main(int argc, char **argv)main6,60
+
+lapic.c,1731
+#define ID ID14,340
+#define VER VER15,375
+#define TPR TPR16,415
+#define EOI EOI17,461
+#define SVR SVR18,497
+  #define ENABLE ENABLE19,555
+#define ESR ESR20,604
+#define ICRLO ICRLO21,649
+  #define INIT INIT22,699
+  #define STARTUP STARTUP23,747
+  #define DELIVS DELIVS24,796
+  #define ASSERT ASSERT25,849
+  #define DEASSERT DEASSERT26,917
+  #define LEVEL LEVEL27,949
+  #define BCAST BCAST28,1002
+  #define BUSY BUSY29,1074
+  #define FIXED FIXED30,1106
+#define ICRHI ICRHI31,1138
+#define TIMER TIMER32,1196
+  #define X1 X133,1257
+  #define PERIODIC PERIODIC34,1313
+#define PCINT PCINT35,1359
+#define LINT0 LINT036,1415
+#define LINT1 LINT137,1476
+#define ERROR ERROR38,1537
+  #define MASKED MASKED39,1598
+#define TICR TICR40,1652
+#define TCCR TCCR41,1704
+#define TDCR TDCR42,1756
+volatile uint *lapic;  // Initialized in mp.clapic44,1816
+lapicw(int index, int value)lapicw48,1888
+lapicinit(void)lapicinit55,2005
+lapicid(void)lapicid101,3215
+lapiceoi(void)lapiceoi110,3319
+microdelay(int us)microdelay119,3477
+#define CMOS_PORT CMOS_PORT123,3501
+#define CMOS_RETURN CMOS_RETURN124,3527
+lapicstartap(uchar apicid, uint addr)lapicstartap129,3668
+#define CMOS_STATA CMOS_STATA163,4823
+#define CMOS_STATB CMOS_STATB164,4849
+#define CMOS_UIP CMOS_UIP165,4875
+#define SECS SECS167,4938
+#define MINS MINS168,4959
+#define HOURS HOURS169,4980
+#define DAY DAY170,5001
+#define MONTH MONTH171,5022
+#define YEAR YEAR172,5043
+static uint cmos_read(uint reg)cmos_read174,5065
+static void fill_rtcdate(struct rtcdate *r)fill_rtcdate182,5174
+void cmostime(struct rtcdate *r)cmostime193,5474
+#define    CONV(CONV214,5871
+#undef     CONVCONV221,6045
+
+ln.c,39
+main(int argc, char *argv[])main6,60
+
+log.c,798
+struct logheader {logheader34,1129
+  int n;n35,1148
+  int block[LOGSIZE];block36,1157
+struct log {log39,1183
+  struct spinlock lock;lock40,1196
+  int start;start41,1220
+  int size;size42,1233
+  int outstanding; // how many FS sys calls are executing.outstanding43,1245
+  int committing;  // in commit(), please wait.committing44,1304
+  int dev;dev45,1352
+  struct logheader lh;lh46,1363
+struct log log;log48,1389
+initlog(int dev)initlog54,1470
+install_trans(void)install_trans70,1806
+read_head(void)read_head86,2255
+write_head(void)write_head102,2623
+recover_from_log(void)recover_from_log116,2897
+begin_op(void)begin_op126,3099
+end_op(void)end_op146,3560
+write_log(void)write_log178,4226
+commit()commit193,4572
+log_write(struct buf *b)log_write214,5187
+
+ls.c,100
+fmtname(char *path)fmtname7,78
+ls(char *path)ls26,426
+main(int argc, char *argv[])main74,1386
+
+main.c,227
+main(void)main18,472
+mpenter(void)mpenter42,1308
+mpmain(void)mpmain52,1420
+pde_t entrypgdir[];  // For entry.Sentrypgdir60,1640
+startothers(void)startothers64,1728
+pde_t entrypgdir[NPDENTRIES] = {entrypgdir103,2945
+
+memide.c,167
+static int disksize;disksize18,362
+static uchar *memdisk;memdisk19,383
+ideinit(void)ideinit22,412
+ideintr(void)ideintr30,538
+iderw(struct buf *b)iderw39,729
+
+mkdir.c,39
+main(int argc, char *argv[])main6,60
+
+mkfs.c,976
+#define stat stat8,119
+#define static_assert(static_assert15,274
+#define NINODES NINODES18,358
+int nbitmap = FSSIZE/(BSIZE*8) + 1;nbitmap23,475
+int ninodeblocks = NINODES / IPB + 1;ninodeblocks24,511
+int nlog = LOGSIZE;nlog25,549
+int nmeta;    // Number of meta blocks (boot, sb, nlog, inode, bitmap)nmeta26,569
+int nblocks;  // Number of data blocksnblocks27,640
+int fsfd;fsfd29,680
+struct superblock sb;sb30,690
+char zeroes[BSIZE];zeroes31,712
+uint freeinode = 1;freeinode32,732
+uint freeblock;freeblock33,752
+xshort(ushort x)xshort46,1030
+xint(uint x)xint56,1135
+main(int argc, char *argv[])main68,1269
+wsect(uint sec, void *buf)wsect171,3642
+winode(uint inum, struct dinode *ip)winode184,3845
+rinode(uint inum, struct dinode *ip)rinode198,4066
+rsect(uint sec, void *buf)rsect211,4269
+ialloc(ushort type)ialloc224,4470
+balloc(int used)balloc238,4688
+#define min(min253,5024
+iappend(uint inum, void *xp, int n)iappend256,5072
+
+mp.c,273
+struct cpu cpus[NCPU];cpus14,290
+int ncpu;ncpu15,313
+uchar ioapicid;ioapicid16,323
+sum(uchar *addr, int len)sum19,353
+mpsearch1(uint a, int len)mpsearch131,539
+mpsearch(void)mpsearch49,1055
+mpconfig(struct mp **pmp)mpconfig73,1662
+mpinit(void)mpinit92,2050
+
+picirq.c,91
+#define IO_PIC1 IO_PIC16,119
+#define IO_PIC2 IO_PIC27,172
+picinit(void)picinit11,304
+
+pipe.c,611
+#define PIPESIZE PIPESIZE11,171
+struct pipe {pipe13,193
+  struct spinlock lock;lock14,207
+  char data[PIPESIZE];data15,231
+  uint nread;     // number of bytes readnread16,254
+  uint nwrite;    // number of bytes writtennwrite17,296
+  int readopen;   // read fd is still openreadopen18,341
+  int writeopen;  // write fd is still openwriteopen19,384
+pipealloc(struct file **f0, struct file **f1)pipealloc23,436
+pipeclose(struct pipe *p, int writable)pipeclose60,1083
+pipewrite(struct pipe *p, char *addr, int n)pipewrite79,1411
+piperead(struct pipe *p, char *addr, int n)piperead101,1913
+
+printf.c,136
+putc(int fd, char c)putc6,68
+printint(int fd, int xx, int base, int sgn)printint12,126
+printf(int fd, char *fmt, ...)printf40,558
+
+proc.c,767
+  struct spinlock lock;lock11,163
+  struct proc proc[NPROC];proc12,187
+} ptable;ptable13,214
+static struct proc *initproc;initproc15,225
+int nextpid = 1;nextpid17,256
+pinit(void)pinit24,367
+cpuid() {cpuid31,467
+mycpu(void)mycpu38,653
+myproc(void) {myproc58,1158
+allocproc(void)allocproc74,1477
+userinit(void)userinit121,2330
+growproc(int n)growproc159,3349
+fork(void)fork181,3837
+exit(void)exit228,4795
+wait(void)wait273,5693
+scheduler(void)scheduler323,6936
+sched(void)sched366,8040
+yield(void)yield386,8474
+forkret(void)forkret397,8705
+sleep(void *chan, struct spinlock *lk)sleep418,9202
+wakeup1(void *chan)wakeup1458,10044
+wakeup(void *chan)wakeup469,10264
+kill(int pid)kill480,10477
+procdump(void)procdump504,11006
+
+rm.c,39
+main(int argc, char *argv[])main6,60
+
+sh.c,1888
+#define EXEC EXEC8,101
+#define REDIR REDIR9,117
+#define PIPE PIPE10,133
+#define LIST LIST11,149
+#define BACK BACK12,165
+#define MAXARGS MAXARGS14,182
+struct cmd {cmd16,202
+  int type;type17,215
+struct execcmd {execcmd20,231
+  int type;type21,248
+  char *argv[MAXARGS];argv22,260
+  char *eargv[MAXARGS];eargv23,283
+struct redircmd {redircmd26,311
+  int type;type27,329
+  struct cmd *cmd;cmd28,341
+  char *file;file29,360
+  char *efile;efile30,374
+  int mode;mode31,389
+  int fd;fd32,401
+struct pipecmd {pipecmd35,415
+  int type;type36,432
+  struct cmd *left;left37,444
+  struct cmd *right;right38,464
+struct listcmd {listcmd41,489
+  int type;type42,506
+  struct cmd *left;left43,518
+  struct cmd *right;right44,538
+struct backcmd {backcmd47,563
+  int type;type48,580
+  struct cmd *cmd;cmd49,592
+runcmd(struct cmd *cmd)runcmd58,750
+getcmd(char *buf, int nbuf)getcmd134,2067
+main(void)main145,2218
+panic(char *s)panic175,2830
+fork1(void)fork1182,2888
+execcmd(void)execcmd196,3024
+redircmd(struct cmd *subcmd, char *file, char *efile, int mode, int fd)redircmd207,3188
+pipecmd(struct cmd *left, struct cmd *right)pipecmd223,3511
+listcmd(struct cmd *left, struct cmd *right)listcmd236,3748
+backcmd(struct cmd *subcmd)backcmd249,3985
+char whitespace[] = " \t\r\n\v";whitespace262,4196
+char symbols[] = "<|>&;()";symbols263,4229
+gettoken(char **ps, char *es, char **q, char **eq)gettoken266,4262
+peek(char **ps, char *es, char *toks)peek311,4871
+parsecmd(char *s)parsecmd328,5198
+parseline(char **ps, char *es)parseline345,5446
+parsepipe(char **ps, char *es)parsepipe362,5739
+parseredirs(struct cmd *cmd, char **ps, char *es)parseredirs375,5948
+parseblock(char **ps, char *es)parseblock400,6480
+parseexec(char **ps, char *es)parseexec416,6784
+nulterminate(struct cmd *cmd)nulterminate450,7453
+
+sleeplock.c,234
+initsleeplock(struct sleeplock *lk, char *name)initsleeplock14,201
+acquiresleep(struct sleeplock *lk)acquiresleep23,346
+releasesleep(struct sleeplock *lk)releasesleep35,527
+holdingsleep(struct sleeplock *lk)holdingsleep45,658
+
+spinlock.c,309
+initlock(struct spinlock *lk, char *name)initlock13,192
+acquire(struct spinlock *lk)acquire25,458
+release(struct spinlock *lk)release47,1000
+getcallerpcs(void *v, uint pcs[])getcallerpcs72,1774
+holding(struct spinlock *lock)holding90,2138
+pushcli(void)pushcli101,2408
+popcli(void)popcli113,2566
+
+stressfs.c,41
+main(int argc, char *argv[])main17,466
+
+string.c,435
+memset(void *dst, int c, uint n)memset5,43
+memcmp(const void *v1, const void *v2, uint n)memcmp16,228
+memmove(void *dst, const void *src, uint n)memmove32,427
+memcpy(void *dst, const void *src, uint n)memcpy53,730
+strncmp(const char *p, const char *q, uint n)strncmp59,813
+strncpy(char *s, const char *t, int n)strncpy69,981
+safestrcpy(char *s, const char *t, int n)safestrcpy83,1192
+strlen(const char *s)strlen97,1362
+
+syscall.c,360
+fetchint(uint addr, int *ip)fetchint18,468
+fetchstr(uint addr, char **pp)fetchstr32,827
+argint(int n, int *ip)argint50,1138
+argptr(int n, char **pp, int size)argptr59,1391
+argstr(int n, char **pp)argstr77,1895
+static int (*syscalls[])(void) = {syscalls107,2588
+static char *syscalls_name[] = {syscalls_name131,3143
+syscall(void)syscall157,3744
+
+sysfile.c,654
+argfd(int n, int *pfd, struct file **pf)argfd22,490
+fdalloc(struct file *f)fdalloc41,854
+sys_dup(void)sys_dup56,1070
+sys_read(void)sys_read70,1231
+sys_write(void)sys_write82,1408
+sys_close(void)sys_close94,1587
+sys_fstat(void)sys_fstat107,1739
+sys_link(void)sys_link119,1970
+isdirempty(struct inode *dp)isdirempty169,2711
+sys_unlink(void)sys_unlink185,2998
+create(char *path, short type, short major, short minor)create242,3911
+sys_open(void)sys_open287,4805
+sys_mkdir(void)sys_mkdir337,5633
+sys_mknod(void)sys_mknod353,5851
+sys_chdir(void)sys_chdir373,6164
+sys_exec(void)sys_exec398,6536
+sys_pipe(void)sys_pipe424,6994
+
+sysproc.c,258
+sys_fork(void)sys_fork11,154
+sys_exit(void)sys_exit17,195
+sys_wait(void)sys_wait24,257
+sys_kill(void)sys_kill30,298
+sys_getpid(void)sys_getpid40,395
+sys_sbrk(void)sys_sbrk46,445
+sys_sleep(void)sys_sleep60,605
+sys_uptime(void)sys_uptime83,981
+
+trap.c,201
+struct gatedesc idt[256];idt12,225
+struct spinlock tickslock;tickslock14,320
+uint ticks;ticks15,347
+tvinit(void)tvinit18,365
+idtinit(void)idtinit30,585
+trap(struct trapframe *tf)trap37,651
+
+uart.c,205
+#define COM1 COM115,242
+static int uart;    // is there a uart?uart17,265
+uartinit(void)uartinit20,311
+uartputc(int c)uartputc52,970
+uartgetc(void)uartgetc64,1127
+uartintr(void)uartintr74,1244
+
+ulib.c,376
+strcpy(char *s, char *t)strcpy8,98
+strcmp(const char *p, const char *q)strcmp19,202
+strlen(char *s)strlen27,319
+memset(void *dst, int c, uint n)memset37,398
+strchr(const char *s, char c)strchr44,476
+gets(char *buf, int max)gets53,585
+stat(char *n, struct stat *st)stat71,818
+atoi(const char *s)atoi85,978
+memmove(void *vdst, void *vsrc, int n)memmove96,1099
+
+umalloc.c,364
+typedef long Align;Align9,175
+union header {header11,196
+    union header *ptr;ptr13,222
+    uint size;size14,245
+  } s;s15,260
+  Align x;x16,267
+typedef union header Header;Header19,282
+static Header base;base21,312
+static Header *freep;freep22,332
+free(void *ap)free25,360
+morecore(uint nu)morecore47,823
+malloc(uint nbytes)malloc64,1056
+
+usertests.c,1674
+char buf[8192];buf11,173
+char name[3];name12,189
+char *echoargv[] = { "echo", "ALL", "TESTS", "PASSED", 0 };echoargv13,203
+int stdout = 1;stdout14,263
+iputtest(void)iputtest18,337
+exitiputtest(void)exitiputtest43,831
+openiputtest(void)openiputtest85,1688
+opentest(void)opentest119,2277
+writetest(void)writetest139,2609
+writetest1(void)writetest1188,3681
+createtest(void)createtest245,4745
+void dirtest(void)dirtest267,5152
+exectest(void)exectest294,5585
+pipe1(void)pipe1306,5771
+preempt(void)preempt359,6798
+exitwait(void)exitwait405,7516
+mem(void)mem428,7841
+sharedfd(void)sharedfd465,8476
+fourfiles(void)fourfiles518,9579
+createdelete(void)createdelete584,10824
+unlinkread(void)unlinkread657,12295
+linktest(void)linktest702,13157
+concreate(void)concreate765,14254
+linkunlink()linkunlink858,16066
+bigdir(void)bigdir893,16603
+subdir(void)subdir935,17306
+bigwrite(void)bigwrite1119,21172
+bigfile(void)bigfile1148,21682
+fourteen(void)fourteen1204,22695
+rmdot(void)rmdot1245,23700
+dirfile(void)dirfile1284,24419
+iref(void)iref1344,25624
+forktest(void)forktest1380,26347
+sbrktest(void)sbrktest1415,26824
+#define BIG BIG1452,27530
+validateint(int *p)validateint1550,29814
+validatetest(void)validatetest1563,30039
+char uninit[10000];uninit1593,30651
+bsstest(void)bsstest1595,30676
+bigargtest(void)bigargtest1613,31052
+fsfull()fsfull1648,32005
+uio()uio1699,33040
+  #define RTC_ADDR RTC_ADDR1701,33048
+  #define RTC_DATA RTC_DATA1702,33072
+void argptest()argptest1727,33622
+unsigned long randstate = 1;randstate1740,33824
+rand()rand1742,33866
+main(int argc, char *argv[])main1749,33950
+
+vm.c,1109
+pde_t *kpgdir;  // for use in scheduler()kpgdir11,194
+seginit(void)seginit16,320
+walkpgdir(pde_t *pgdir, const void *va, int alloc)walkpgdir36,1045
+mappages(pde_t *pgdir, void *va, uint size, uint pa, int perm)mappages61,1765
+static struct kmap {kmap105,3299
+  void *virt;virt106,3320
+  uint phys_start;phys_start107,3334
+  uint phys_end;phys_end108,3353
+  int perm;perm109,3370
+} kmap[] = {kmap110,3382
+setupkvm(void)setupkvm119,3730
+kvmalloc(void)kvmalloc141,4257
+switchkvm(void)switchkvm150,4420
+switchuvm(struct proc *p)switchuvm157,4565
+inituvm(pde_t *pgdir, char *init, uint sz)inituvm183,5354
+loaduvm(pde_t *pgdir, char *addr, struct inode *ip, uint offset, uint sz)loaduvm198,5729
+allocuvm(pde_t *pgdir, uint oldsz, uint newsz)allocuvm222,6376
+deallocuvm(pde_t *pgdir, uint oldsz, uint newsz)deallocuvm256,7225
+freevm(pde_t *pgdir)freevm284,7772
+clearpteu(pde_t *pgdir, char *uva)clearpteu303,8137
+copyuvm(pde_t *pgdir, uint sz)copyuvm316,8366
+uva2ka(pde_t *pgdir, char *uva)uva2ka348,9031
+copyout(pde_t *pgdir, uint va, void *p, uint len)copyout364,9411
+
+wc.c,96
+char buf[512];buf5,56
+wc(int fd, char *name)wc8,77
+main(int argc, char *argv[])main36,538
+
+zombie.c,22
+main(void)main9,124

@@ -7,6 +7,8 @@
 #include "mmu.h"
 #include "proc.h"
 
+//#include "date.h"
+
 int
 sys_fork(void)
 {
@@ -15,8 +17,7 @@ sys_fork(void)
 
 int
 sys_exit(void)
-{
-  exit();
+{ exit();
   return 0;  // not reached
 }
 
@@ -64,6 +65,7 @@ sys_sleep(void)
 
   if(argint(0, &n) < 0)
     return -1;
+  cprintf("n : %d\n",n);
   acquire(&tickslock);
   ticks0 = ticks;
   while(ticks - ticks0 < n){
@@ -88,4 +90,28 @@ sys_uptime(void)
   xticks = ticks;
   release(&tickslock);
   return xticks;
+}
+
+int
+sys_date(void)
+{
+  char *r;
+
+  if(argptr(0,&r ,sizeof(struct rtcdate* )) < 0)
+    return -1;
+
+  cmostime((struct rtcdate *)r);
+  return 0;
+}
+
+int
+sys_print(void)
+{
+  acquire(&sysprintlock);
+  if (sysprintstate == 0 ) 
+    sysprintstate = 1;
+  else
+    sysprintstate = 0;
+  release(&sysprintlock);
+  return 0;
 }
