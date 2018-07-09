@@ -474,6 +474,8 @@ nulterminate(struct cmd *cmd)
 
   case PIPE:
     pcmd = (struct pipecmd*)cmd;
+
+    
     nulterminate(pcmd->left);
     nulterminate(pcmd->right);
     break;

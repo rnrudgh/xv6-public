@@ -105,6 +105,7 @@ extern int sys_write(void);
 extern int sys_uptime(void);
 extern int sys_date(void);
 extern int sys_print(void);
+extern int sys_dup2(void);
 
 static int (*syscalls[])(void) = {
 [SYS_fork]    sys_fork,
@@ -130,6 +131,7 @@ static int (*syscalls[])(void) = {
 [SYS_close]   sys_close,
 [SYS_date]    sys_date,
 [SYS_print]   sys_print,
+[SYS_dup2]    sys_dup2,
 };
 static char *syscalls_name[] = {
 [SYS_fork]    "sys_fork",
@@ -154,7 +156,7 @@ static char *syscalls_name[] = {
 [SYS_mkdir]   "sys_mkdir",
 [SYS_close]   "sys_close",
 [SYS_print]   "sys_print",
-
+[SYS_dup2]    "sys_dup2",
 };
 /*
 void 
@@ -202,6 +204,7 @@ syscall(void)
     curproc->tf->eax = syscalls[num]();
     if( sysprintstate == 1 ) {
       //print_syscall_arg(num, curproc->tf->eax);
+
       cprintf("%s -> %d\n",syscalls_name[num], curproc->tf->eax);
     }
 
