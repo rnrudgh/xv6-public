@@ -1,4 +1,4 @@
-cscope 15 $HOME/6.828/xv6-public               0000284235
+cscope 15 $HOME/6.828/xv6-public               0000284679
 	@asm.h
 
 5 
@@ -22654,7 +22654,7 @@ num
 sy¥ršt¡©e
  == 1 ) {
 
-207 
+208 
 	`ýrštf
 ("% -> %d\n",
 sysÿÎs_Çme
@@ -22668,11 +22668,11 @@ tf
 —x
 );
 
-211 
+212 
 	`ýrštf
 ("%d %s: unknown sys call %d\n",
 
-212 
+213 
 cu½roc
 ->
 pid
@@ -22682,7 +22682,7 @@ pid
 num
 );
 
-213 
+214 
 cu½roc
 ->
 tf
@@ -22690,7 +22690,7 @@ tf
 —x
  = -1;
 
-215 
+216 
 	}
 }
 
@@ -24670,12 +24670,6 @@ addr
 sz
 ;
 
-55 if(
-	`grow´oc
-(
-n
-) < 0)
-
 57  
 addr
 ;
@@ -24960,59 +24954,77 @@ STDIO
 	~"¥šlock.h
 "
 
-12 
+12 
+m­·ges
+(
+pde_t
+ *
+pgdœ
+, *
+va
+, 
+ušt
+ 
+size
+, ušˆ
+·
+, 
+³rm
+);
+
+15 
 g©edesc
  
 	gidt
 [256];
 
-13 
+16 
 ušt
  
 veùÜs
 [];
 
-14 
+17 
 ¥šlock
  
 	gtick¦ock
 ;
 
-15 
+18 
 ušt
  
 	gticks
 ;
 
-17 
+20 
 ¥šlock
  
 	gsy¥ršŽock
 ;
 
-18 
+21 
 ušt
  
 	gsy¥ršt¡©e
 ;
 
-21 
+24 
 	$tvš™
 ()
 
-23 
+26 
 i
 ;
 
-25 
+28 
 sy¥ršt¡©e
  = 0;
 
-26 
+29 
 i
  = 0; i < 256; i++)
 
-27 
+30 
 	`SETGATE
 (
 idt
@@ -25024,7 +25036,7 @@ SEG_KCODE
 veùÜs
 [i], 0);
 
-28 
+31 
 	`SETGATE
 (
 idt
@@ -25038,37 +25050,37 @@ veùÜs
 DPL_USER
 );
 
-30 
+33 
 	`š™lock
 (&
 tick¦ock
 , "time");
 
-31 
+34 
 	`š™lock
 (&
 sy¥ršŽock
 , "sysprintlock");
 
-32 
+35 
 	}
 }
 
-35 
+38 
 	$idtš™
 ()
 
-37 
+40 
 	`lidt
 (
 idt
 , (idt));
 
-38 
+41 
 	}
 }
 
-42 
+45 
 	$Œ­
 (
 Œ­äame
@@ -25076,7 +25088,7 @@ idt
 tf
 )
 
-44 if(
+47 if(
 tf
 ->
 Œ­no
@@ -25084,141 +25096,213 @@ tf
 T_SYSCALL
 ){
 
-45 if(
+48 if(
 	`my´oc
 ()->
 kžËd
 )
 
-46 
+49 
 	`ex™
 ();
 
-47 
+50 
 	`my´oc
 ()->
 tf
  =f;
 
-48 
+51 
 	`sysÿÎ
 ();
 
-49 if(
+52 if(
 	`my´oc
 ()->
 kžËd
 )
 
-50 
+53 
 	`ex™
 ();
 
-54 
+57 
 tf
 ->
 Œ­no
 ){
 
-55 
+58 
+T_PGFLT
+:
+
+60 * 
+mem
+ = 
+	`k®loc
+();
+
+63 ià(
+mem
+ == 0) {
+
+64 
+	`ýrštf
+("allocuvm out of memory\n");
+
+67 
+	`my´oc
+()->
+kžËd
+ = 1;
+
+71 
+	`mem£t
+(
+mem
+, 0 , 
+PGSIZE
+);
+
+72 if(
+	`m­·ges
+Ð
+	`my´oc
+(è-> 
+pgdœ
+ ,(*)
+	`PGROUNDDOWN
+Ð
+	`rü2
+(è), 
+PGSIZE
+, 
+	`V2P
+(
+mem
+)
+
+73 ,
+PTE_W
+|
+PTE_U
+ ) < 0) {
+
+74 
+	`ýrštf
+("sdfafdafsafsfsfa\n");
+
+75 
+	`kä“
+(
+mem
+);
+
+76 
+	`my´oc
+()->
+kžËd
+ = 1;
+
+83 
 T_IRQ0
  + 
 IRQ_TIMER
 :
 
-56 if(
+84 if(
 	`ýuid
 () == 0){
 
-57 
+85 
 	`acquœe
 (&
 tick¦ock
 );
 
-58 
+86 
 ticks
 ++;
 
-59 
+87 
 	`wakeup
 (&
 ticks
 );
 
-60 
+88 
 	`»Ëa£
 (&
 tick¦ock
 );
 
-62 
+90 
 	`Ïpiûoi
 ();
 
-64 
+92 
 T_IRQ0
  + 
 IRQ_IDE
 :
 
-65 
+93 
 	`idešŒ
 ();
 
-66 
+94 
 	`Ïpiûoi
 ();
 
-68 
+96 
 T_IRQ0
  + 
 IRQ_IDE
 +1:
 
-71 
+99 
 T_IRQ0
  + 
 IRQ_KBD
 :
 
-72 
+100 
 	`kbdšŒ
 ();
 
-73 
+101 
 	`Ïpiûoi
 ();
 
-75 
+103 
 T_IRQ0
  + 
 IRQ_COM1
 :
 
-76 
+104 
 	`u¬tšŒ
 ();
 
-77 
+105 
 	`Ïpiûoi
 ();
 
-79 
+107 
 T_IRQ0
  + 7:
 
-80 
+108 
 T_IRQ0
  + 
 IRQ_SPURIOUS
 :
 
-81 
+109 
 	`ýrštf
 ("cpu%d: spurious interrupt‡t %x:%x\n",
 
-82 
+110 
 	`ýuid
 (), 
 tf
@@ -25228,11 +25312,11 @@ cs
 e
 );
 
-83 
+111 
 	`Ïpiûoi
 ();
 
-88 if(
+116 if(
 	`my´oc
 (è=ð0 || (
 tf
@@ -25240,11 +25324,11 @@ tf
 cs
 &3) == 0){
 
-90 
+118 
 	`ýrštf
 ("unexpectedrap %d from cpu %dƒip %x (cr2=0x%x)\n",
 
-91 
+119 
 tf
 ->
 Œ­no
@@ -25256,15 +25340,15 @@ e
 	`rü2
 ());
 
-92 
+120 
 	`·nic
 ("trap");
 
-95 
+123 
 	`ýrštf
 ("pid %d %s:rap %dƒrr %d on cpu %d "
 
-97 
+125 
 	`my´oc
 ()->
 pid
@@ -25276,7 +25360,7 @@ tf
 Œ­no
 ,
 
-98 
+126 
 tf
 ->
 ”r
@@ -25288,13 +25372,13 @@ e
 	`rü2
 ());
 
-99 
+127 
 	`my´oc
 ()->
 kžËd
  = 1;
 
-105 if(
+133 if(
 	`my´oc
 (è&& my´oc()->
 kžËd
@@ -25306,11 +25390,11 @@ cs
 DPL_USER
 )
 
-106 
+134 
 	`ex™
 ();
 
-110 if(
+138 if(
 	`my´oc
 (è&& my´oc()->
 ¡©e
@@ -25318,7 +25402,7 @@ DPL_USER
 RUNNING
  &&
 
-111 
+139 
 tf
 ->
 Œ­no
@@ -25328,11 +25412,11 @@ T_IRQ0
 IRQ_TIMER
 )
 
-112 
+140 
 	`y›ld
 ();
 
-115 if(
+143 if(
 	`my´oc
 (è&& my´oc()->
 kžËd
@@ -25344,11 +25428,11 @@ cs
 DPL_USER
 )
 
-116 
+144 
 	`ex™
 ();
 
-117 
+145 
 	}
 }
 
