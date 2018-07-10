@@ -57,24 +57,27 @@ trap(struct trapframe *tf)
   switch(tf->trapno){
   case T_PGFLT:
     {
+      // allocate 1 page for lazy allocate
       void* mem = kalloc();
 
 
+      
       if (mem == 0) {
-        cprintf("allocuvm out of memory\n");
-        //deallocuvm(myproc()->pagedir, );
-        
-       myproc()->killed = 1;
-        return ;
+        cprintf("out of memory\n");
+        myproc()->killed = 1;
       }
 
+      // initialize allocate page
       memset(mem, 0 , PGSIZE);
+
+      // rcr2() is wrapper funtion which get cr2 register value.
+      // cr2 register regist virtual address occuring page fault.
+      // mapping both address ocurring page fault and PHYSICAL ADDRESS.
       if(mappages( myproc() -> pgdir ,(void *)PGROUNDDOWN( rcr2() ), PGSIZE, V2P(mem)
           ,PTE_W|PTE_U ) < 0) {
         cprintf("sdfafdafsafsfsfa\n");
         kfree(mem);
-       myproc()->killed = 1;
-        return ;
+        myproc()->killed = 1;
        }
 
        //myproc()->killed = 1;
