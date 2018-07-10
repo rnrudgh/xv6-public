@@ -45,16 +45,60 @@ void
 trap(struct trapframe *tf)
 {
   if(tf->trapno == T_SYSCALL){
-    if(myproc()->killed)
+    struct proc *curproc = myproc();
+    if(curproc->killed)
       exit();
-    myproc()->tf = tf;
+    curproc->tf = tf;
     syscall();
-    if(myproc()->killed)
+    if(curproc->killed)
       exit();
     return;
   }
 
   switch(tf->trapno){
+    case T_IRQ0 + IRQ_TIMER:
+    if(cpuid() == 0){
+      acquire(&tickslock);
+      ticks++;
+      wakeup(&ticks);
+      release(&tickslock);
+      
+    }
+    if(myproc() != 0 && (tf->cs & SEG_UCODE) == SEG_UCODE) {
+      myproc()->ticks++;
+      if( myproc()->ticks >= myproc()->alarmticks) {
+
+         myproc()->ticks = 0;
+         tf->esp -= 4;
+         *(uint *)tf->esp = tf->eip;
+         tf->eip = (uint)myproc()->alarmhandler;
+      }
+    } 
+
+    
+    lapiceoi();
+    break;
+  case T_IRQ0 + IRQ_IDE:
+    ideintr();
+    lapiceoi();
+    break;
+  case T_IRQ0 + IRQ_IDE+1:
+    // Bochs generates spurious IDE1 interrupts.
+    break;
+  case T_IRQ0 + IRQ_KBD:
+    kbdintr();
+    lapiceoi();
+    break;
+  case T_IRQ0 + IRQ_COM1:
+    uartintr();
+    lapiceoi();
+    break;
+  case T_IRQ0 + 7:
+  case T_IRQ0 + IRQ_SPURIOUS:
+    cprintf("cpu%d: spurious interrupt at %x:%x\n",
+            cpuid(), tf->cs, tf->eip);
+    lapiceoi();
+    break;
   case T_PGFLT:
     {
       void* mem = kalloc();
@@ -80,36 +124,6 @@ trap(struct trapframe *tf)
        //myproc()->killed = 1;
        break;
     }
-  case T_IRQ0 + IRQ_TIMER:
-    if(cpuid() == 0){
-      acquire(&tickslock);
-      ticks++;
-      wakeup(&ticks);
-      release(&tickslock);
-    }
-    lapiceoi();
-    break;
-  case T_IRQ0 + IRQ_IDE:
-    ideintr();
-    lapiceoi();
-    break;
-  case T_IRQ0 + IRQ_IDE+1:
-    // Bochs generates spurious IDE1 interrupts.
-    break;
-  case T_IRQ0 + IRQ_KBD:
-    kbdintr();
-    lapiceoi();
-    break;
-  case T_IRQ0 + IRQ_COM1:
-    uartintr();
-    lapiceoi();
-    break;
-  case T_IRQ0 + 7:
-  case T_IRQ0 + IRQ_SPURIOUS:
-    cprintf("cpu%d: spurious interrupt at %x:%x\n",
-            cpuid(), tf->cs, tf->eip);
-    lapiceoi();
-    break;
 
   //PAGEBREAK: 13
   default:

@@ -23,3 +23,4 @@
 #define SYS_date   22
 #define SYS_print  23
 #define SYS_dup2   24
+#define SYS_alarm  25

@@ -122,3 +122,17 @@ sys_print(void)
   return 0;
 }
 
+int
+sys_alarm(void)
+{
+  int ticks;
+  void (*handler)();
+
+  if( argint(0, &ticks) < 0 || argptr(1, (char **)&handler, 1) < 0 )
+    return -1;
+
+  myproc() -> ticks = 0;
+  myproc() -> alarmticks = ticks;
+  myproc() -> alarmhandler = handler;
+  return 0;
+}
