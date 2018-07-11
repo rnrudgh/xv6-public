@@ -75,9 +75,9 @@ trap(struct trapframe *tf)
       // mapping both address ocurring page fault and PHYSICAL ADDRESS.
       if(mappages( myproc() -> pgdir ,(void *)PGROUNDDOWN( rcr2() ), PGSIZE, V2P(mem)
           ,PTE_W|PTE_U ) < 0) {
-        cprintf("sdfafdafsafsfsfa\n");
-        kfree(mem);
-        myproc()->killed = 1;
+         cprintf("sdfafdafsafsfsfa\n");
+         kfree(mem);
+         myproc()->killed = 1;
        }
 
        //myproc()->killed = 1;
