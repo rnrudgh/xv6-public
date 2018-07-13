@@ -19,6 +19,7 @@ int keys[NKEYS];
 int nthread = 1;
 volatile int done;
 
+// define lock number of hash table buckets 
 pthread_mutex_t put_lock[NBUCKET];
 
 double
@@ -57,17 +58,28 @@ static
 void put(int key, int value)
 {
   int i = key % NBUCKET;
+  
+  // memory allocate doesn't influence concurrency
   struct entry *e = malloc(sizeof(struct entry));
+  struct entry **head;
   e->key = key;
   e->value = value;
+
+  // lpck acquire
   pthread_mutex_lock(&put_lock[i]);
-  struct entry **head = &table[i];
+
+  // critical section beacause it change concurrent data structure
+  head = &table[i];
   e->next = *head;
   *head = e;
   //insert(key, value, &table[i], table[i]);
+  
+  //lock release
   pthread_mutex_unlock(&put_lock[i]);
 }
 
+// get function not change concurrent data structure
+// so it donesn't need to implement lock
 static struct entry*
 get(int key)
 {

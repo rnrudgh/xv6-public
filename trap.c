@@ -64,13 +64,20 @@ trap(struct trapframe *tf)
       release(&tickslock);
       
     }
+    // this part only to manipulate a process's alarm ticks if there's a process running
+    // and if the timer interrupt came from user space
     if(myproc() != 0 && (tf->cs & SEG_UCODE) == SEG_UCODE) {
       myproc()->ticks++;
       if( myproc()->ticks >= myproc()->alarmticks) {
 
          myproc()->ticks = 0;
+
+         // regist current instruction address for return address on stack memory
          tf->esp -= 4;
          *(uint *)tf->esp = tf->eip;
+
+         // regist trap fram's eip alarmhandler
+         // if it go to user space, it execute alarmhandler
          tf->eip = (uint)myproc()->alarmhandler;
       }
     } 
