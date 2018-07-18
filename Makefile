@@ -150,8 +150,10 @@ _forktest: forktest.o $(ULIB)
 	$(OBJDUMP) -S _forktest > forktest.asm
 
 _uthread: uthread.o uthread_switch.o 
-  $(LD) $(LDFLAGS)  -N  -e  main  -Ttext  0 -o  _uthread  uthread.o uthread_switch.o  $(ULIB)
-  $(OBJDUMP)  -S  _uthread  > uthread.asm
+	$(LD) $(LDFLAGS) -N -e main -Ttext 0 -o _uthread uthread.o uthread_switch.o $(ULIB) 
+	$(OBJDUMP) -S _uthread > uthread.asm
+
+
 
 
 mkfs: mkfs.c fs.h
