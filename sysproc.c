@@ -117,7 +117,7 @@ sys_print(void)
   if (sysprintstate == 0 ) 
     sysprintstate = 1;
   else
-    sysprintstate = 0;
+   sysprintstate = 0;
   release(&sysprintlock);
   return 0;
 }

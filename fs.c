@@ -396,6 +396,43 @@ bmap(struct inode *ip, uint bn)
     brelse(bp);
     return addr;
   }
+   bn -= NINDIRECT;
+ 
+#ifdef USE_DOUBLE_IND
+   // block number is over Indirect BLOCK Number
+   if(bn < NDOUBLYINDIRECT) {
+     
+     // if DOUBLE INDIRECT BLOCK not allocate, then do that.
+     if((addr = ip -> addrs[NDIRECT + 1]) == 0)
+       ip -> addrs[NDIRECT + 1] = addr = balloc(ip->dev);
+
+     bp = bread(ip->dev, addr);
+     a = (uint*)bp->data;
+     
+     // divide by INDIRECT BLOCK NUMBER
+     short double_index = bn >> 7;
+     // get offset of DOUBLE INDRIECT BLOCK
+     short double_offset = bn & (NINDIRECT-1);
+
+     if ( (addr = a[double_index]) == 0 ) {
+       a[double_index] = addr = balloc(ip->dev);
+       log_write(bp);
+     }
+     brelse(bp);
+     
+     //read a real data block
+     bp = bread(ip->dev,addr);
+     a = (uint*)bp->data;
+
+     if((addr = a[double_offset]) == 0) {
+       a[double_offset] = addr = balloc(ip->dev);
+       log_write(bp);
+     }
+     brelse(bp);
+     return addr;
+
+   }
+#endif
 
   panic("bmap: out of range");
 }
